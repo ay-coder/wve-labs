@@ -1,0 +1,20 @@
+define({
+  "name": "WVE Labs",
+  "version": "0.0.2",
+  "description": "WVE API Details",
+  "title": "WVE API ",
+  "url": "http://35.154.84.230/wve-labs/public/api/",
+  "sampleUrl": "http://35.154.84.230/wve-labs/public/api/",
+  "template": {
+    "withCompare": true,
+    "withGenerator": true
+  },
+  "defaultVersion": "0.0.0",
+  "apidoc": "0.3.0",
+  "generator": {
+    "name": "apidoc",
+    "time": "2018-04-26T05:35:13.571Z",
+    "url": "http://apidocjs.com",
+    "version": "0.17.5"
+  }
+});
