@@ -19,6 +19,13 @@ class PortfolioTransformer extends Transformer
             $item = (object)$item;
         }
 
+        $category = [];
+
+        if(isset($item->category))
+        {
+            $category = explode('||', $item->category);
+        }
+
         return [
             "portfolioId"           => (int) $item->id,
             "portfolioTitle"        =>  isset($item->title) ? $item->title : '', 
@@ -27,7 +34,8 @@ class PortfolioTransformer extends Transformer
             "portfolioIcon"         =>  URL::to('/').'/uploads/portfolio/' . $item->icon, 
             "portfolioImage"        =>  URL::to('/').'/uploads/portfolio/' . $item->image, 
             "portfolioBannerImage"  =>  URL::to('/').'/uploads/portfolio/' . $item->banner_image, 
-            "portfolioCategory"     =>  isset($item->category) ? $item->category :'', 
+            "portfolioBackgroundImage"  =>  URL::to('/').'/uploads/portfolio/' . $item->background_image, 
+            "portfolioCategory"     =>  $category, 
             "portfolioIde"          =>  isset($item->ide) ? $item->ide : '' , 
             "portfolioFrontend"     =>  isset($item->frontend) ? $item->frontend : '', 
             "portfolioCountry"      =>  isset($item->country) ? $item->country : '', 

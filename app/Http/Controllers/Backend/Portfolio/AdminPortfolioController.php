@@ -80,10 +80,17 @@ class AdminPortfolioController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
+
+        if(isset($input['category']) && count($input['category']) > 0)
+        {
+           $input['category'] = implode("||", $input['category']);
+        }
+        
         $input = array_merge($input, [
             'icon'          => 'default_icon.png',
             'image'         => 'default_image.png',
-            'banner_image'  => 'default_banner_image.png'
+            'banner_image'  => 'default_banner_image.png',
+            'background_image'  => 'default_background_image.png'
         ]);
         
         if($request->file('image'))
@@ -105,6 +112,13 @@ class AdminPortfolioController extends Controller
             $imageName  = rand(11111, 99999) . '_portfolio.' . $request->file('banner_image')->getClientOriginalExtension();
             $request->file('banner_image')->move(base_path() . '/public/uploads/portfolio/', $imageName);
             $input = array_merge($input, ['banner_image' => $imageName]);
+        }
+
+        if($request->file('background_image'))
+        {
+            $imageName  = rand(11111, 99999) . '_portfolio.' . $request->file('background_image')->getClientOriginalExtension();
+            $request->file('background_image')->move(base_path() . '/public/uploads/portfolio/', $imageName);
+            $input = array_merge($input, ['background_image' => $imageName]);
         }
 
         $this->repository->create($input);
@@ -152,6 +166,10 @@ class AdminPortfolioController extends Controller
     {
         $input = $request->all();
         
+        if(isset($input['category']) && count($input['category']) > 0)
+        {
+           $input['category'] = implode("||", $input['category']);
+        }
         
         if($request->file('image'))
         {
@@ -172,6 +190,13 @@ class AdminPortfolioController extends Controller
             $imageName  = rand(11111, 99999) . '_portfolio.' . $request->file('banner_image')->getClientOriginalExtension();
             $request->file('banner_image')->move(base_path() . '/public/uploads/portfolio/', $imageName);
             $input = array_merge($input, ['banner_image' => $imageName]);
+        }
+
+        if($request->file('background_image'))
+        {
+            $imageName  = rand(11111, 99999) . '_portfolio.' . $request->file('background_image')->getClientOriginalExtension();
+            $request->file('background_image')->move(base_path() . '/public/uploads/portfolio/', $imageName);
+            $input = array_merge($input, ['background_image' => $imageName]);
         }
 
         $status = $this->repository->update($id, $input);
@@ -220,6 +245,15 @@ class AdminPortfolioController extends Controller
                 return '';
                 
             })
+            ->addColumn('category', function ($item) 
+            {
+                if(isset($item->category))
+                {
+                    return implode(', ', explode('||', $item->category));
+                }
+
+                return '';
+            }) 
               ->addColumn('banner_image', function ($item) 
             {
                 if(isset($item->banner_image) && file_exists(public_path('uploads/portfolio/'.$item->banner_image)))

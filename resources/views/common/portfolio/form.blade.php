@@ -25,7 +25,7 @@
     <div class="form-group">
         {{ Form::label('category', 'Category :', ['class' => 'col-lg-2 control-label']) }}
         <div class="col-lg-10">
-            {{ Form::select('category', ['IPHONE' => 'I Phone', 'ANDROID' => 'Android'], isset($item->category) ? $item->category : 'IPHONE', ['class' => 'form-control', 'required' => 'required']) }}
+            {{ Form::select('category[]', ['I-Phone' => 'I-Phone', 'Android' => 'Android'], isset($item->category) ? explode("||", $item->category) : 'I-Phone', ['class' => 'form-control', 'multiple' => true, 'required' => 'required']) }}
         </div>
     </div>
 </div><div class="box-body">
@@ -94,6 +94,7 @@
         </center>
     </div>
 </div>
+
 <div class="box-body">
     <div class="form-group">
         {{ Form::label('image', 'Image :', ['class' => 'col-lg-2 control-label']) }}
@@ -117,6 +118,20 @@
         <center>
             @if(isset($item->banner_image))
                 {{ Html::image('/uploads/portfolio/'.$item->banner_image, 'Image', ['width' => 250, 'height' => 250]) }}
+            @endif
+        </center>
+    </div>
+</div>
+
+<div class="box-body">
+    <div class="form-group">
+        {{ Form::label('background_image', 'Background Image :', ['class' => 'col-lg-2 control-label']) }}
+        <div class="col-lg-10">
+            {{ Form::file('background_image', null, ['class' => 'form-control']) }}
+        </div>
+        <center>
+            @if(isset($item->background_image))
+                {{ Html::image('/uploads/portfolio/'.$item->background_image, 'Image', ['width' => 250, 'height' => 250]) }}
             @endif
         </center>
     </div>
