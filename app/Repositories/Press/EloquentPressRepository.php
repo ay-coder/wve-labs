@@ -1,30 +1,30 @@
-<?php namespace App\Repositories\Career;
+<?php namespace App\Repositories\Press;
 
 /**
- * Class EloquentCareerRepository
+ * Class EloquentPressRepository
  *
  * @author Anuj Jaha ( er.anujjaha@gmail.com)
  */
 
-use App\Models\Career\Career;
+use App\Models\Press\Press;
 use App\Repositories\DbRepository;
 use App\Exceptions\GeneralException;
 
-class EloquentCareerRepository extends DbRepository
+class EloquentPressRepository extends DbRepository
 {
     /**
-     * Career Model
+     * Press Model
      *
      * @var Object
      */
     public $model;
 
     /**
-     * Career Title
+     * Press Title
      *
      * @var string
      */
-    public $moduleTitle = 'Career';
+    public $moduleTitle = 'Press';
 
     /**
      * Table Headers
@@ -34,12 +34,10 @@ class EloquentCareerRepository extends DbRepository
     public $tableHeaders = [
         'id'            => 'Id',
         'title'         => 'Title',
-        'position'      => 'Position',
-        'sub_title'     => 'Sub Title',
-        'experience'    => 'Experience',
+        'extra_link'    => 'External Link',
         'description'   => 'Description',
-        'location'      => 'Location',
-        'icon'          => 'Icon',
+        'status'        => 'Status',
+        'image'         => 'Image',
         "actions"       => "Actions"
     ];
 
@@ -61,21 +59,9 @@ class EloquentCareerRepository extends DbRepository
                 'searchable'    => true,
                 'sortable'      => true
             ],
-        'position' =>   [
-                'data'          => 'position',
-                'name'          => 'position',
-                'searchable'    => true,
-                'sortable'      => true
-            ],
-		'sub_title' =>   [
-                'data'          => 'sub_title',
-                'name'          => 'sub_title',
-                'searchable'    => true,
-                'sortable'      => true
-            ],
-		'experience' =>   [
-                'data'          => 'experience',
-                'name'          => 'experience',
+        'extra_link' =>   [
+                'data'          => 'extra_link',
+                'name'          => 'extra_link',
                 'searchable'    => true,
                 'sortable'      => true
             ],
@@ -85,19 +71,20 @@ class EloquentCareerRepository extends DbRepository
                 'searchable'    => true,
                 'sortable'      => true
             ],
-		'location' =>   [
-                'data'          => 'location',
-                'name'          => 'location',
+		
+		'status' =>   [
+                'data'          => 'status',
+                'name'          => 'status',
                 'searchable'    => true,
                 'sortable'      => true
             ],
-		'icon' =>   [
-                'data'          => 'icon',
-                'name'          => 'icon',
-                'searchable'    => true,
-                'sortable'      => true
+		'image' =>   [
+                'data'          => 'image',
+                'name'          => 'image',
+                'searchable'    => false,
+                'sortable'      => false
             ],
-	    'actions' => [
+		'actions' => [
             'data'          => 'actions',
             'name'          => 'actions',
             'searchable'    => false,
@@ -146,13 +133,13 @@ class EloquentCareerRepository extends DbRepository
      * @var array
      */
     public $moduleRoutes = [
-        'listRoute'     => 'career.index',
-        'createRoute'   => 'career.create',
-        'storeRoute'    => 'career.store',
-        'editRoute'     => 'career.edit',
-        'updateRoute'   => 'career.update',
-        'deleteRoute'   => 'career.destroy',
-        'dataRoute'     => 'career.get-list-data'
+        'listRoute'     => 'press.index',
+        'createRoute'   => 'press.create',
+        'storeRoute'    => 'press.store',
+        'editRoute'     => 'press.edit',
+        'updateRoute'   => 'press.update',
+        'deleteRoute'   => 'press.destroy',
+        'dataRoute'     => 'press.get-list-data'
     ];
 
     /**
@@ -161,10 +148,10 @@ class EloquentCareerRepository extends DbRepository
      * @var array
      */
     public $moduleViews = [
-        'listView'      => 'career.index',
-        'createView'    => 'career.create',
-        'editView'      => 'career.edit',
-        'deleteView'    => 'career.destroy',
+        'listView'      => 'press.index',
+        'createView'    => 'press.create',
+        'editView'      => 'press.edit',
+        'deleteView'    => 'press.destroy',
     ];
 
     /**
@@ -173,11 +160,11 @@ class EloquentCareerRepository extends DbRepository
      */
     public function __construct()
     {
-        $this->model = new Career;
+        $this->model = new Press;
     }
 
     /**
-     * Create Career
+     * Create Press
      *
      * @param array $input
      * @return mixed
@@ -196,7 +183,7 @@ class EloquentCareerRepository extends DbRepository
     }
 
     /**
-     * Update Career
+     * Update Press
      *
      * @param int $id
      * @param array $input
@@ -217,7 +204,7 @@ class EloquentCareerRepository extends DbRepository
     }
 
     /**
-     * Destroy Career
+     * Destroy Press
      *
      * @param int $id
      * @return mixed

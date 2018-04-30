@@ -9,6 +9,15 @@
 
 <div class="box-body">
     <div class="form-group">
+        {{ Form::label('position', 'Position :', ['class' => 'col-lg-2 control-label']) }}
+        <div class="col-lg-10">
+            {{ Form::text('position', null, ['class' => 'form-control', 'placeholder' => 'Position', 'required' => 'required']) }}
+        </div>
+    </div>
+</div>
+
+<div class="box-body">
+    <div class="form-group">
         {{ Form::label('sub_title', 'Sub Title :', ['class' => 'col-lg-2 control-label']) }}
         <div class="col-lg-10">
             {{ Form::text('sub_title', null, ['class' => 'form-control', 'placeholder' => 'Sub Title', 'required' => 'required']) }}

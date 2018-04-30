@@ -26,7 +26,7 @@ class PortfolioTransformer extends Transformer
             $category = explode('||', $item->category);
         }
 
-        return [
+        $response = [
             "portfolioId"           => (int) $item->id,
             "portfolioTitle"        =>  isset($item->title) ? $item->title : '', 
             "portfolioSubTitle"     =>  isset($item->sub_title) ? $item->sub_title : '', 
@@ -36,13 +36,28 @@ class PortfolioTransformer extends Transformer
             "portfolioBannerImage"  =>  URL::to('/').'/uploads/portfolio/' . $item->banner_image, 
             "portfolioBackgroundImage"  =>  URL::to('/').'/uploads/portfolio/' . $item->background_image, 
             "portfolioCategory"     =>  $category, 
-            "portfolioIde"          =>  isset($item->ide) ? $item->ide : '' , 
-            "portfolioFrontend"     =>  isset($item->frontend) ? $item->frontend : '', 
             "portfolioCountry"      =>  isset($item->country) ? $item->country : '', 
-            "portfolioOsVersion"    =>  isset($item->os_version) ? $item->os_version : '', 
             "portfolioBackend"      =>  isset($item->backend) ? $item->backend : '', 
-            "portfolioRating"       =>  isset($item->rating) ? $item->rating : '', 
             "portfolioDescription"  =>  isset($item->description) ? $item->description  : ''
         ];
+
+        $response['ios'] = [
+            'isIos'         => isset($item->is_ios) ? $item->is_ios : '',
+            'iosIde'        => isset($item->ide) ? $item->ide : '' ,
+            'iosFrontend'   => isset($item->frontend) ? $item->frontend : '',
+            'iosVersion'    => isset($item->os_version) ? $item->os_version : '',
+            'iosRating'     => isset($item->rating) ? $item->rating : ''
+        ];
+
+
+        $response['android'] = [
+            'isAndroid'         => isset($item->is_android) ? $item->is_android : '',
+            'androidIde'        => isset($item->android_ide) ? $item->android_ide : '' ,
+            'androidFrontend'   => isset($item->android_frontend) ? $item->android_frontend : '',
+            'androidVersion'    => isset($item->android_os_version) ? $item->android_os_version : '',
+            'androidRating'     => isset($item->android_client_rating) ? $item->android_client_rating : ''
+        ];
+
+        return $response;
     }
 }

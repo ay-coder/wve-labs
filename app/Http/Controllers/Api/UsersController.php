@@ -15,9 +15,11 @@ use App\Http\Transformers\UserTransformer;
 use App\Http\Utilities\FileUploads;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuthExceptions\JWTException;
+use App\Http\Controllers\Api\BaseApiController;
+use App\Repositories\Inquiry\EloquentInquiryRepository;
 use Auth;
 
-class UsersController extends Controller 
+class UsersController extends BaseApiController 
 {
     protected $userTransformer;
     /**
@@ -73,6 +75,46 @@ class UsersController extends Controller
         } else {
             return $this->respondInternalError('Error in Logout');
         }
+    }
+
+    /**
+     * Submit Inquiry
+     * 
+     * @param object $request
+     * @return json
+     */
+    public function submitInquiry(Request $request)
+    {
+        if($request->get('name'))
+        {
+            $data = [   
+                'name'              => $request->get('name'),
+                'emailid'           => $request->get('emailid'),
+                'contact_number'    => $request->get('contact_number'),
+                'description'       => $request->get('description'),
+                'budget'            => $request->get('budget'),
+                'country'           => $request->get('country'),
+                'lat'               => $request->get('lat'),
+                'long'              => $request->get('long')
+            ];
+
+            $repository = new EloquentInquiryRepository;   
+
+            $status = $repository->create($data);
+
+            if($status)
+            {
+                $output = [
+                    'message' => "Inquiry submitted successfully !"
+                ];
+
+                return $this->successResponse($output);
+            }
+        }
+
+         return $this->setStatusCode(400)->failureResponse([
+                'message' => 'Something went wrong !'
+                ], 'Fail to Submit Inquiry!');
     }
 
 }

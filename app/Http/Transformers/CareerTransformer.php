@@ -22,6 +22,7 @@ class CareerTransformer extends Transformer
         return [
             "careerId"          => (int) $item->id,
             "careerTitle"       =>  isset($item->title) ? $item->title : '',
+            "careerPosition"    =>  isset($item->position) ? $item->position : '',
             "careerSubTitle"    =>  isset($item->sub_title) ? $item->sub_title : '', 
             "careerExperience"  =>  isset($item->experience) ? $item->experience : '', 
             "careerLocation"    =>  isset($item->location) ? $item->location : '', 

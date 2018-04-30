@@ -1,30 +1,30 @@
-<?php namespace App\Models\Career;
+<?php namespace App\Models\Press;
 
 /**
- * Class Career
+ * Class Press
  *
  * @author Anuj Jaha ( er.anujjaha@gmail.com)
  */
 
 use App\Models\BaseModel;
-use App\Models\Career\Traits\Attribute\Attribute;
-use App\Models\Career\Traits\Relationship\Relationship;
+use App\Models\Press\Traits\Attribute\Attribute;
+use App\Models\Press\Traits\Relationship\Relationship;
 
-class Career extends BaseModel
+class Press extends BaseModel
 {
     use Attribute, Relationship;
     /**
      * Database Table
      *
      */
-    protected $table = "data_careers";
+    protected $table = "data_press";
 
     /**
      * Fillable Database Fields
      *
      */
     protected $fillable = [
-        "id", "title", "position", "sub_title", "experience", "description", "location", "icon", "status", "created_at", "updated_at", 
+        "id", "title", "image", "description", "extra_link", "status", "created_at", "updated_at", 
     ];
 
     /**

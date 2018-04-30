@@ -1,30 +1,30 @@
-<?php namespace App\Repositories\Career;
+<?php namespace App\Repositories\Inquiry;
 
 /**
- * Class EloquentCareerRepository
+ * Class EloquentInquiryRepository
  *
  * @author Anuj Jaha ( er.anujjaha@gmail.com)
  */
 
-use App\Models\Career\Career;
+use App\Models\Inquiry\Inquiry;
 use App\Repositories\DbRepository;
 use App\Exceptions\GeneralException;
 
-class EloquentCareerRepository extends DbRepository
+class EloquentInquiryRepository extends DbRepository
 {
     /**
-     * Career Model
+     * Inquiry Model
      *
      * @var Object
      */
     public $model;
 
     /**
-     * Career Title
+     * Inquiry Title
      *
      * @var string
      */
-    public $moduleTitle = 'Career';
+    public $moduleTitle = 'Inquiry';
 
     /**
      * Table Headers
@@ -32,15 +32,19 @@ class EloquentCareerRepository extends DbRepository
      * @var array
      */
     public $tableHeaders = [
-        'id'            => 'Id',
-        'title'         => 'Title',
-        'position'      => 'Position',
-        'sub_title'     => 'Sub Title',
-        'experience'    => 'Experience',
-        'description'   => 'Description',
-        'location'      => 'Location',
-        'icon'          => 'Icon',
-        "actions"       => "Actions"
+        'id'        => 'Id',
+'name'        => 'Name',
+'emailid'        => 'Emailid',
+'contact_number'        => 'Contact_number',
+'description'        => 'Description',
+'budget'        => 'Budget',
+'country'        => 'Country',
+'lat'        => 'Lat',
+'long'        => 'Long',
+'status'        => 'Status',
+'created_at'        => 'Created_at',
+'updated_at'        => 'Updated_at',
+"actions"         => "Actions"
     ];
 
     /**
@@ -55,27 +59,21 @@ class EloquentCareerRepository extends DbRepository
                 'searchable'    => true,
                 'sortable'      => true
             ],
-		'title' =>   [
-                'data'          => 'title',
-                'name'          => 'title',
+		'name' =>   [
+                'data'          => 'name',
+                'name'          => 'name',
                 'searchable'    => true,
                 'sortable'      => true
             ],
-        'position' =>   [
-                'data'          => 'position',
-                'name'          => 'position',
+		'emailid' =>   [
+                'data'          => 'emailid',
+                'name'          => 'emailid',
                 'searchable'    => true,
                 'sortable'      => true
             ],
-		'sub_title' =>   [
-                'data'          => 'sub_title',
-                'name'          => 'sub_title',
-                'searchable'    => true,
-                'sortable'      => true
-            ],
-		'experience' =>   [
-                'data'          => 'experience',
-                'name'          => 'experience',
+		'contact_number' =>   [
+                'data'          => 'contact_number',
+                'name'          => 'contact_number',
                 'searchable'    => true,
                 'sortable'      => true
             ],
@@ -85,19 +83,49 @@ class EloquentCareerRepository extends DbRepository
                 'searchable'    => true,
                 'sortable'      => true
             ],
-		'location' =>   [
-                'data'          => 'location',
-                'name'          => 'location',
+		'budget' =>   [
+                'data'          => 'budget',
+                'name'          => 'budget',
                 'searchable'    => true,
                 'sortable'      => true
             ],
-		'icon' =>   [
-                'data'          => 'icon',
-                'name'          => 'icon',
+		'country' =>   [
+                'data'          => 'country',
+                'name'          => 'country',
                 'searchable'    => true,
                 'sortable'      => true
             ],
-	    'actions' => [
+		'lat' =>   [
+                'data'          => 'lat',
+                'name'          => 'lat',
+                'searchable'    => true,
+                'sortable'      => true
+            ],
+		'long' =>   [
+                'data'          => 'long',
+                'name'          => 'long',
+                'searchable'    => true,
+                'sortable'      => true
+            ],
+		'status' =>   [
+                'data'          => 'status',
+                'name'          => 'status',
+                'searchable'    => true,
+                'sortable'      => true
+            ],
+		'created_at' =>   [
+                'data'          => 'created_at',
+                'name'          => 'created_at',
+                'searchable'    => true,
+                'sortable'      => true
+            ],
+		'updated_at' =>   [
+                'data'          => 'updated_at',
+                'name'          => 'updated_at',
+                'searchable'    => true,
+                'sortable'      => true
+            ],
+		'actions' => [
             'data'          => 'actions',
             'name'          => 'actions',
             'searchable'    => false,
@@ -146,13 +174,13 @@ class EloquentCareerRepository extends DbRepository
      * @var array
      */
     public $moduleRoutes = [
-        'listRoute'     => 'career.index',
-        'createRoute'   => 'career.create',
-        'storeRoute'    => 'career.store',
-        'editRoute'     => 'career.edit',
-        'updateRoute'   => 'career.update',
-        'deleteRoute'   => 'career.destroy',
-        'dataRoute'     => 'career.get-list-data'
+        'listRoute'     => 'inquiry.index',
+        'createRoute'   => 'inquiry.create',
+        'storeRoute'    => 'inquiry.store',
+        'editRoute'     => 'inquiry.edit',
+        'updateRoute'   => 'inquiry.update',
+        'deleteRoute'   => 'inquiry.destroy',
+        'dataRoute'     => 'inquiry.get-list-data'
     ];
 
     /**
@@ -161,10 +189,10 @@ class EloquentCareerRepository extends DbRepository
      * @var array
      */
     public $moduleViews = [
-        'listView'      => 'career.index',
-        'createView'    => 'career.create',
-        'editView'      => 'career.edit',
-        'deleteView'    => 'career.destroy',
+        'listView'      => 'inquiry.index',
+        'createView'    => 'inquiry.create',
+        'editView'      => 'inquiry.edit',
+        'deleteView'    => 'inquiry.destroy',
     ];
 
     /**
@@ -173,11 +201,11 @@ class EloquentCareerRepository extends DbRepository
      */
     public function __construct()
     {
-        $this->model = new Career;
+        $this->model = new Inquiry;
     }
 
     /**
-     * Create Career
+     * Create Inquiry
      *
      * @param array $input
      * @return mixed
@@ -196,7 +224,7 @@ class EloquentCareerRepository extends DbRepository
     }
 
     /**
-     * Update Career
+     * Update Inquiry
      *
      * @param int $id
      * @param array $input
@@ -217,7 +245,7 @@ class EloquentCareerRepository extends DbRepository
     }
 
     /**
-     * Destroy Career
+     * Destroy Inquiry
      *
      * @param int $id
      * @return mixed
@@ -306,7 +334,7 @@ class EloquentCareerRepository extends DbRepository
     {
         if($isCreate)
         {
-            $input = array_merge($input, ['user_id' => access()->user()->id]);
+            //$input = array_merge($input, ['user_id' => access()->user()->id]);
         }
 
         return $input;
