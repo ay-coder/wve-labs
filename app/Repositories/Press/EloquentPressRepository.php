@@ -36,7 +36,7 @@ class EloquentPressRepository extends DbRepository
         'title'         => 'Title',
         'extra_link'    => 'External Link',
         'description'   => 'Description',
-        'status'        => 'Status',
+        'icon'          => 'Icon',
         'image'         => 'Image',
         "actions"       => "Actions"
     ];
@@ -71,20 +71,20 @@ class EloquentPressRepository extends DbRepository
                 'searchable'    => true,
                 'sortable'      => true
             ],
-		
-		'status' =>   [
-                'data'          => 'status',
-                'name'          => 'status',
-                'searchable'    => true,
-                'sortable'      => true
+		'icon' =>   [
+                'data'          => 'icon',
+                'name'          => 'icon',
+                'searchable'    => false,
+                'sortable'      => false
             ],
+
 		'image' =>   [
                 'data'          => 'image',
                 'name'          => 'image',
                 'searchable'    => false,
                 'sortable'      => false
             ],
-		'actions' => [
+        'actions' => [
             'data'          => 'actions',
             'name'          => 'actions',
             'searchable'    => false,

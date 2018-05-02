@@ -81,6 +81,7 @@ class AdminPressController extends Controller
     {
         $input = $request->all();
         $input = array_merge($input, [
+            'icon'          => 'default.png',
             'image'         => 'default.png'
         ]);
 
@@ -89,6 +90,13 @@ class AdminPressController extends Controller
             $imageName  = rand(11111, 99999) . '_press.' . $request->file('image')->getClientOriginalExtension();
             $request->file('image')->move(base_path() . '/public/uploads/press/', $imageName);
             $input = array_merge($input, ['image' => $imageName]);
+        }
+
+        if($request->file('icon'))
+        {
+            $imageName  = rand(11111, 99999) . '_press.' . $request->file('icon')->getClientOriginalExtension();
+            $request->file('icon')->move(base_path() . '/public/uploads/press/', $imageName);
+            $input = array_merge($input, ['icon' => $imageName]);
         }
 
         $this->repository->create($input);
@@ -143,6 +151,13 @@ class AdminPressController extends Controller
             $input = array_merge($input, ['image' => $imageName]);
         }
 
+        if($request->file('icon'))
+        {
+            $imageName  = rand(11111, 99999) . '_press.' . $request->file('icon')->getClientOriginalExtension();
+            $request->file('icon')->move(base_path() . '/public/uploads/press/', $imageName);
+            $input = array_merge($input, ['icon' => $imageName]);
+        }
+
         $status = $this->repository->update($id, $input);
 
         return redirect()->route($this->repository->setAdmin(true)->getActionRoute('listRoute'))->withFlashSuccess($this->editSuccessMessage);
@@ -169,6 +184,16 @@ class AdminPressController extends Controller
     {
         return Datatables::of($this->repository->getForDataTable())
             ->escapeColumns(['id', 'sort'])
+            ->addColumn('icon', function ($item) 
+            {
+                if(isset($item->image) && file_exists(public_path('uploads/press/'.$item->icon)))
+                {
+                    return  Html::image('/uploads/press/'.$item->icon, 'Icon', ['width' => 60, 'height' => 60]);    
+                }
+
+                return '';
+                
+            })
             ->addColumn('image', function ($item) 
             {
                 if(isset($item->image) && file_exists(public_path('uploads/press/'.$item->image)))

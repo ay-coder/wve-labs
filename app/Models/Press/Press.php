@@ -24,7 +24,7 @@ class Press extends BaseModel
      *
      */
     protected $fillable = [
-        "id", "title", "image", "description", "extra_link", "status", "created_at", "updated_at", 
+        "id", "title", "icon", "button_text", "image", "description", "extra_link", "status", "created_at", "updated_at", 
     ];
 
     /**
