@@ -26,6 +26,25 @@ class PortfolioTransformer extends Transformer
             $category = explode('||', $item->category);
         }
 
+        $type       = 0;
+        $ios        = isset($item->is_ios) && $item->is_ios == 1 ? 1 : 0;
+        $android    = isset($item->is_android) && $item->is_android == 1 ? 1 : 0;
+
+        if($ios == 1)
+        {
+            $type = 1;   
+        }
+
+        if($android == 1)
+        {
+            $type = 2;   
+        }
+
+        if($ios == 1 && $android == 1)
+        {
+            $type = 3;
+        }
+
         $response = [
             "portfolioId"           => (int) $item->id,
             "portfolioTitle"        =>  isset($item->title) ? $item->title : '', 
@@ -38,7 +57,8 @@ class PortfolioTransformer extends Transformer
             "portfolioCategory"     =>  $category, 
             "portfolioCountry"      =>  isset($item->country) ? $item->country : '', 
             "portfolioBackend"      =>  isset($item->backend) ? $item->backend : '', 
-            "portfolioDescription"  =>  isset($item->description) ? $item->description  : ''
+            "portfolioDescription"  =>  isset($item->description) ? $item->description  : '',
+            "appPaltformType"       => $type
         ];
 
         $response['ios'] = [
