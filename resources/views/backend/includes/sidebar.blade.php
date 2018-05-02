@@ -37,6 +37,41 @@
                 </a>
             </li>
 
+            <li class="{{ active_class(Active::checkUriPattern('admin/team')) }}">
+                <a href="{{ route('admin.team.index') }}">
+                    <i class="fa fa-users" aria-hidden="true"></i>
+                    <span>Manage Team</span>
+                </a>
+            </li>
+
+            <li class="{{ active_class(Active::checkUriPattern('admin/press')) }}">
+                <a href="{{ route('admin.press.index') }}">
+                    <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                    <span>Manage Press</span>
+                </a>
+            </li>
+
+            <li class="{{ active_class(Active::checkUriPattern('admin/portfolio')) }}">
+                <a href="{{ route('admin.portfolio.index') }}">
+                    <i class="fa fa-id-card" aria-hidden="true"></i>
+                    <span>Manage Portfolio</span>
+                </a>
+            </li>
+
+            <li class="{{ active_class(Active::checkUriPattern('admin/inquiry')) }}">
+                <a href="{{ route('admin.inquiry.index') }}">
+                    <i class="fa fa-handshake-o" aria-hidden="true"></i>
+                    <span>Manage Inquiries</span>
+                </a>
+            </li>
+
+            <li class="{{ active_class(Active::checkUriPattern('admin/career')) }}">
+                <a href="{{ route('admin.career.index') }}">
+                    <i class="fa fa-briefcase" aria-hidden="true"></i>
+                    <span>Manage Careers</span>
+                </a>
+            </li>
+
             <li class="header">{{ trans('menus.backend.sidebar.system') }}</li>
 
             @role(1)

@@ -15,6 +15,7 @@ trait Attribute
      */
     public function getEditButtonAttribute($routes, $prefix = 'admin', $isAdmin = false)
     {
+        return '';
         $id = $isAdmin ? $this->id : hasher()->encode($this->id);
 
         return '<a href="'.route($prefix .'.'. $routes->editRoute, $id).'" class="btn btn-xs btn-primary"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Edit"></i></a> ';

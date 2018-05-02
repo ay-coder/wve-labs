@@ -32,19 +32,17 @@ class EloquentInquiryRepository extends DbRepository
      * @var array
      */
     public $tableHeaders = [
-        'id'        => 'Id',
-'name'        => 'Name',
-'emailid'        => 'Emailid',
-'contact_number'        => 'Contact_number',
-'description'        => 'Description',
-'budget'        => 'Budget',
-'country'        => 'Country',
-'lat'        => 'Lat',
-'long'        => 'Long',
-'status'        => 'Status',
-'created_at'        => 'Created_at',
-'updated_at'        => 'Updated_at',
-"actions"         => "Actions"
+        'id'                => 'Id',
+        'name'              => 'Name',
+        'emailid'           => 'Emailid',
+        'contact_number'    => 'Mobile',
+        'description'       => 'Description',
+        'budget'            => 'Budget',
+        'country'           => 'Country',
+        'lat'               => 'Lat',
+        'long'              => 'Long',
+        'created_at'        => 'Created At',
+        "actions"           => "Actions"
     ];
 
     /**
@@ -107,25 +105,13 @@ class EloquentInquiryRepository extends DbRepository
                 'searchable'    => true,
                 'sortable'      => true
             ],
-		'status' =>   [
-                'data'          => 'status',
-                'name'          => 'status',
-                'searchable'    => true,
-                'sortable'      => true
-            ],
 		'created_at' =>   [
                 'data'          => 'created_at',
                 'name'          => 'created_at',
                 'searchable'    => true,
                 'sortable'      => true
             ],
-		'updated_at' =>   [
-                'data'          => 'updated_at',
-                'name'          => 'updated_at',
-                'searchable'    => true,
-                'sortable'      => true
-            ],
-		'actions' => [
+	    'actions' => [
             'data'          => 'actions',
             'name'          => 'actions',
             'searchable'    => false,
