@@ -26,7 +26,7 @@ class PortfolioTransformer extends Transformer
             $category = explode('||', $item->category);
         }
 
-        $type       = 0;
+        $type       = 1;
         $ios        = isset($item->is_ios) && $item->is_ios == 1 ? 1 : 0;
         $android    = isset($item->is_android) && $item->is_android == 1 ? 1 : 0;
 
@@ -66,7 +66,7 @@ class PortfolioTransformer extends Transformer
             'iosIde'        => isset($item->ide) ? $item->ide : '' ,
             'iosFrontend'   => isset($item->frontend) ? $item->frontend : '',
             'iosVersion'    => isset($item->os_version) ? $item->os_version : '',
-            'iosRating'     => isset($item->rating) ? $item->rating : ''
+            'iosRating'     => isset($item->rating) ? (int) $item->rating : 0
         ];
 
 
@@ -75,7 +75,7 @@ class PortfolioTransformer extends Transformer
             'androidIde'        => isset($item->android_ide) ? $item->android_ide : '' ,
             'androidFrontend'   => isset($item->android_frontend) ? $item->android_frontend : '',
             'androidVersion'    => isset($item->android_os_version) ? $item->android_os_version : '',
-            'androidRating'     => isset($item->android_client_rating) ? $item->android_client_rating : ''
+            'androidRating'     => isset($item->android_client_rating) ? (int) $item->android_client_rating : 0
         ];
 
         return $response;
